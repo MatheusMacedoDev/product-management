@@ -8,9 +8,9 @@ namespace ProductManagement.libs
 		
 		private static LinkedList<Brand> brands = new LinkedList<Brand>();
 
-		public Brand(int id, string name) 
+		public Brand(string name) 
 		{
-			this.Id = id;
+			this.Id = brands.Count == 0 ? 0 : brands.Last().Id + 1;	;
 			this.Name = name;
 			this.RegistrationDate = DateTime.Now;
 		}
@@ -26,9 +26,14 @@ namespace ProductManagement.libs
 			return brands.ToList();
 		}
 		
-		public string Delete(Brand brand) 
+		public static string Delete(byte id) 
 		{
-			brands.Remove(brand);
+			Brand brand = brands.ToList().Find(brand => brand.Id == id);
+			
+			if (brand != null) 
+			{
+				brands.Remove(brand);
+			}
 			return $"The brand ${brand.Name} has been deleted!";
 		}
 	}
