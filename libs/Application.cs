@@ -24,7 +24,10 @@ namespace ProductManagement.libs
 					Console.WriteLine($"(1) Register a new user");
 					Console.WriteLine($"(2) List users");
 					Console.WriteLine($"(3) Delete some user");
-					Console.WriteLine($"(4) Exit");
+					Console.WriteLine($"(4) Register a new brand");
+					Console.WriteLine($"(5) List brands");
+					Console.WriteLine($"(6) Remove brand");
+					Console.WriteLine($"(7) Exit");
 					Console.WriteLine($"");
 					
 					Console.Write($"Type here: ");
@@ -42,6 +45,15 @@ namespace ProductManagement.libs
 							deleteUserArea();
 							break;
 						case 4:
+							registerNewBrandArea();
+							break;
+						case 5:
+							listBrandsArea();
+							break;
+						case 6:
+							deleteBrandArea();
+							break;
+						case 7: 
 							break;
 						default:
 							Console.WriteLine($"Invalid option!");
@@ -50,7 +62,7 @@ namespace ProductManagement.libs
 					
 					waitForAnyButton();
 				}
-				while (option != 4);
+				while (option != 7);
 			}
 		}
 		
@@ -112,6 +124,44 @@ namespace ProductManagement.libs
 			Console.Write($"Type the user id: ");
 			byte id = byte.Parse(Console.ReadLine());
 			User.Delete(id);
+		}
+		
+		private void registerNewBrandArea() 
+		{
+			Console.Clear();
+			
+			Console.WriteLine($"Type the brand information");
+
+			Console.Write($"Name: ");
+			string name = Console.ReadLine();
+			
+			Brand newBrand = new Brand(name);
+			Brand.Registrate(newBrand);
+		}
+		
+		private void listBrandsArea() 
+		{
+			Console.Clear();
+			
+			Console.WriteLine($"");
+			Console.WriteLine($"List of brands");
+			
+			List<Brand> brands = Brand.List();
+			
+			foreach (Brand brand in brands) 
+			{
+				Console.WriteLine($"{brand.Id}: {brand.Name} ({brand.RegistrationDate})");
+			}
+		}
+		
+		private void deleteBrandArea() 
+		{
+			Console.Clear();
+			
+			Console.WriteLine($"Delete user");
+			Console.Write($"Type the user id: ");
+			byte id = byte.Parse(Console.ReadLine());
+			Brand.Delete(id);
 		}
 		
 		private void waitForAnyButton() 
