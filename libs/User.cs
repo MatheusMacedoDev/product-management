@@ -12,7 +12,7 @@ namespace ProductManagement.libs
 		
 		public User(string name, string email, string password) 
 		{
-			this.Id = users.Count;
+			this.Id = users.Count == 0 ? 0 : users.Last().Id + 1;	
 			this.Name = name;
 			this.Email = email;
 			this.Password = password;
@@ -30,9 +30,15 @@ namespace ProductManagement.libs
 			return users.ToList();
 		}
 		
-		public static string Delete(User user) 
+		public static string Delete(byte id) 
 		{
-			users.Remove(user);
+			User user = users.ToList().Find(user => user.Id == id);
+			
+			if (user != null) 
+			{
+				users.Remove(user);
+			}
+			
 			return $"The user ${user.Name} has been deleted!";
 		}
 		
