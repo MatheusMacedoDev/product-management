@@ -10,9 +10,9 @@ namespace ProductManagement.libs
 
 		private static LinkedList<User> users = new LinkedList<User>();
 		
-		public User(int id, string name, string email, string password) 
+		public User(string name, string email, string password) 
 		{
-			this.Id = id;
+			this.Id = users.Count;
 			this.Name = name;
 			this.Email = email;
 			this.Password = password;
@@ -30,7 +30,7 @@ namespace ProductManagement.libs
 			return users.ToList();
 		}
 		
-		public string Delete(User user) 
+		public static string Delete(User user) 
 		{
 			users.Remove(user);
 			return $"The user ${user.Name} has been deleted!";
