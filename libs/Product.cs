@@ -11,9 +11,9 @@ namespace ProductManagement.libs
 		
 		private static LinkedList<Product> products = new LinkedList<Product>();
 
-		public Product(int id, string name, float price, Brand brand, User userWhoRegistered) 
+		public Product(string name, float price, Brand brand, User userWhoRegistered) 
 		{
-			this.Id = id;
+			this.Id = products.Count == 0 ? 0 : products.Last().Id + 1;
 			this.Name = name;
 			this.Price = price;
 			this.RegistrationDate = DateTime.Now;
@@ -32,9 +32,15 @@ namespace ProductManagement.libs
 			return products.ToList();
 		}
 		
-		public string Delete(Product product) 
+		public string Delete(byte id) 
 		{
-			products.Remove(product);
+			Product product = products.ToList().Find(product => product.Id == id);
+			
+			if (product != null) 
+			{
+				products.Remove(product);
+			}
+			
 			return $"The brand ${product.Name} has been deleted!";
 		}
 	}
