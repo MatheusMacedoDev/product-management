@@ -10,7 +10,7 @@ namespace ProductManagement.libs
 
 		public Brand(string name) 
 		{
-			this.Id = brands.Count == 0 ? 0 : brands.Last().Id + 1;	;
+			this.Id = brands.Count == 0 ? 0 : brands.Last().Id + 1;
 			this.Name = name;
 			this.RegistrationDate = DateTime.Now;
 		}
