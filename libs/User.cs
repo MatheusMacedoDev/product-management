@@ -35,5 +35,10 @@ namespace ProductManagement.libs
 			users.Remove(user);
 			return $"The user ${user.Name} has been deleted!";
 		}
+		
+		public bool TryPassword(string password) 
+		{
+			return Password == password;
+		}
 	}
 }

@@ -6,7 +6,7 @@ namespace ProductManagement.libs
 		
 		public Login()
 		{
-			
+			this.IsLoggedIn = false;
 		}
 		
 		public string turnLoggedIn(string email, string password) 
