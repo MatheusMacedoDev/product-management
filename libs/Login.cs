@@ -18,6 +18,7 @@ namespace ProductManagement.libs
 			{
 				if (findedUser.TryPassword(password)) 
 				{
+					IsLoggedIn = true;
 					return $"The user has been logged in!";
 				}
 				else 
