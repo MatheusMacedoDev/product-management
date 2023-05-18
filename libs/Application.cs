@@ -12,8 +12,16 @@ namespace ProductManagement.libs
 		public Application()
 		{
 			User.Register(new User("Matheus Macedo", "matheus@email.com", "123456"));
+						
+			bool systemOpened = false;
 			
-			bool systemOpened = loginArea();
+			do 
+			{
+				systemOpened = loginArea();
+			}
+			while (!systemOpened);
+			
+			 
 			if (systemOpened) 
 			{
 				byte option = 0;
@@ -80,6 +88,8 @@ namespace ProductManagement.libs
 		
 		private bool loginArea() 
 		{
+			Console.Clear();
+			
 			Console.Write($"Email: ");
 			string email = Console.ReadLine();
 			
@@ -90,6 +100,8 @@ namespace ProductManagement.libs
 			
 			string loginResponse = login.turnLoggedIn(email, password);
 			Console.WriteLine(loginResponse);
+			
+			waitForAnyButton();
 			
 			return login.IsLoggedIn;
 		}
