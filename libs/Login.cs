@@ -2,6 +2,7 @@ namespace ProductManagement.libs
 {
 	public class Login
 	{
+		public User? LoggedInUser { get; private set; }
 		public bool IsLoggedIn { get; private set; }
 		
 		public Login()
@@ -18,6 +19,7 @@ namespace ProductManagement.libs
 			{
 				if (findedUser.TryPassword(password)) 
 				{
+					LoggedInUser = findedUser;
 					IsLoggedIn = true;
 					return $"The user has been logged in!";
 				}
@@ -35,6 +37,7 @@ namespace ProductManagement.libs
 		
 		public string turnLoggedOut() 
 		{
+			LoggedInUser = null;
 			IsLoggedIn = false;
 			return $"The user has been logged out!";
 		}
