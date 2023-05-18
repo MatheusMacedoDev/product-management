@@ -32,7 +32,7 @@ namespace ProductManagement.libs
 			return products.ToList();
 		}
 		
-		public string Delete(byte id) 
+		public static string Delete(byte id) 
 		{
 			Product product = products.ToList().Find(product => product.Id == id);
 			

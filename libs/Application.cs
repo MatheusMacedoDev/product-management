@@ -27,7 +27,10 @@ namespace ProductManagement.libs
 					Console.WriteLine($"(4) Register a new brand");
 					Console.WriteLine($"(5) List brands");
 					Console.WriteLine($"(6) Remove brand");
-					Console.WriteLine($"(7) Exit");
+					Console.WriteLine($"(7) Register a new product");
+					Console.WriteLine($"(8) List products");
+					Console.WriteLine($"(9) Remove product");
+					Console.WriteLine($"(10) Exit");
 					Console.WriteLine($"");
 					
 					Console.Write($"Type here: ");
@@ -53,7 +56,16 @@ namespace ProductManagement.libs
 						case 6:
 							deleteBrandArea();
 							break;
-						case 7: 
+						case 7:
+							registerNewProductArea();
+							break;
+						case 8:
+							listProductsArea();
+							break;
+						case 9: 
+							deleteProductArea();
+							break;
+						case 10:
 							break;
 						default:
 							Console.WriteLine($"Invalid option!");
@@ -62,7 +74,7 @@ namespace ProductManagement.libs
 					
 					waitForAnyButton();
 				}
-				while (option != 7);
+				while (option != 10);
 			}
 		}
 		
@@ -162,6 +174,54 @@ namespace ProductManagement.libs
 			Console.Write($"Type the user id: ");
 			byte id = byte.Parse(Console.ReadLine());
 			Brand.Delete(id);
+		}
+		
+		private void registerNewProductArea() 
+		{
+			Console.Clear();
+			
+			Console.WriteLine($"Type the product information");
+
+			Console.Write($"Name: ");
+			string name = Console.ReadLine();
+
+			Console.Write($"Price: ");
+			float price = float.Parse(Console.ReadLine());
+
+			Console.Write($"Brand id: ");
+			byte brandId = byte.Parse(Console.ReadLine());
+
+			Brand findedBrand = Brand.List().Find(brand => brand.Id == brandId);
+			
+			Product newProduct = new Product(name, price, findedBrand, login.LoggedInUser);
+			Product.Registrate(newProduct);
+		}
+		
+		private void listProductsArea() 
+		{
+			Console.Clear();
+			
+			Console.WriteLine($"");
+			Console.WriteLine($"List of products");
+			
+			List<Product> products = Product.List();
+			
+			foreach (Product product in products) 
+			{
+				Console.WriteLine($"{product.Id}: {product.Brand.Name
+				} - {product.Name} - {product.Price:C2} ({product.UserWhoRegistered.Name
+				} - {product.RegistrationDate.ToString("dd/MM/yyyy")})");
+			}
+		}
+		
+		private void deleteProductArea() 
+		{
+			Console.Clear();
+			
+			Console.WriteLine($"Delete product");
+			Console.Write($"Type the product id: ");
+			byte id = byte.Parse(Console.ReadLine());
+			Product.Delete(id);
 		}
 		
 		private void waitForAnyButton() 
