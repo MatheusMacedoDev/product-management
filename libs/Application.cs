@@ -24,65 +24,7 @@ namespace ProductManagement.libs
 			 
 			if (systemOpened) 
 			{
-				byte option = 0;
-				do 
-				{
-					Console.Clear();
-					Console.WriteLine($"Management options");
-					Console.WriteLine($"(1) Register a new user");
-					Console.WriteLine($"(2) List users");
-					Console.WriteLine($"(3) Delete some user");
-					Console.WriteLine($"(4) Register a new brand");
-					Console.WriteLine($"(5) List brands");
-					Console.WriteLine($"(6) Remove brand");
-					Console.WriteLine($"(7) Register a new product");
-					Console.WriteLine($"(8) List products");
-					Console.WriteLine($"(9) Remove product");
-					Console.WriteLine($"(10) Exit");
-					Console.WriteLine($"");
-					
-					Console.Write($"Type here: ");
-					option = byte.Parse(Console.ReadLine()); 
-					
-					switch(option) 
-					{
-						case 1:
-							registerNewUserArea();
-							break;
-						case 2:
-							listUsersArea();
-							break;
-						case 3:
-							deleteUserArea();
-							break;
-						case 4:
-							registerNewBrandArea();
-							break;
-						case 5:
-							listBrandsArea();
-							break;
-						case 6:
-							deleteBrandArea();
-							break;
-						case 7:
-							registerNewProductArea();
-							break;
-						case 8:
-							listProductsArea();
-							break;
-						case 9: 
-							deleteProductArea();
-							break;
-						case 10:
-							break;
-						default:
-							Console.WriteLine($"Invalid option!");
-							break;
-					}
-					
-					waitForAnyButton();
-				}
-				while (option != 10);
+				menu();
 			}
 		}
 		
@@ -104,6 +46,69 @@ namespace ProductManagement.libs
 			waitForAnyButton();
 			
 			return login.IsLoggedIn;
+		}
+		
+		private void menu() 
+		{
+			byte option = 0;
+			do 
+			{
+				Console.Clear();
+				Console.WriteLine($"Management options");
+				Console.WriteLine($"(1) Register a new user");
+				Console.WriteLine($"(2) List users");
+				Console.WriteLine($"(3) Delete some user");
+				Console.WriteLine($"(4) Register a new brand");
+				Console.WriteLine($"(5) List brands");
+				Console.WriteLine($"(6) Remove brand");
+				Console.WriteLine($"(7) Register a new product");
+				Console.WriteLine($"(8) List products");
+				Console.WriteLine($"(9) Remove product");
+				Console.WriteLine($"(10) Exit");
+				Console.WriteLine($"");
+				
+				Console.Write($"Type here: ");
+				byte.TryParse(Console.ReadLine(), out option); 
+				
+				switch(option) 
+				{
+					case 1:
+						registerNewUserArea();
+						break;
+					case 2:
+						listUsersArea();
+						break;
+					case 3:
+						deleteUserArea();
+						break;
+					case 4:
+						registerNewBrandArea();
+						break;
+					case 5:
+						listBrandsArea();
+						break;
+					case 6:
+						deleteBrandArea();
+						break;
+					case 7:
+						registerNewProductArea();
+						break;
+					case 8:
+						listProductsArea();
+						break;
+					case 9: 
+						deleteProductArea();
+						break;
+					case 10:
+						break;
+					default:
+						Console.WriteLine($"Invalid option!");
+						break;
+				}
+				
+				waitForAnyButton();
+			}
+			while (option != 10);
 		}
 		
 		private void registerNewUserArea() 
