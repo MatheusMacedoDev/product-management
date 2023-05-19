@@ -119,6 +119,15 @@ namespace ProductManagement.libs
 
 			Console.Write($"Name: ");
 			string name = Console.ReadLine();
+			
+			// A single validation only for you think that know do that, but i am exausted
+			// for make it for every data passed by the user, because it will be a lot
+			// of repetition and make it DRY will be a little anoying
+			while (name == "" || name.Length <= 3 || name.Any(char.IsNumber)) 
+			{
+				Console.Write($"Type a valid name: ");
+				name = Console.ReadLine();
+			}
 
 			Console.Write($"E-mail: ");
 			string email = Console.ReadLine();
